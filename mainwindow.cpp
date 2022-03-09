@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <carcsvwriter.h>
 #include<csvreader.h>
 
 using namespace std;
@@ -34,6 +35,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::searchEmploye()
 {
+    ui->textBrowser->clear();
+
     for(const auto& employe : employes)
     {
         if(employe.fullName == ui->editSearch->text())
@@ -44,3 +47,33 @@ void MainWindow::searchEmploye()
     }
 }
 
+void MainWindow::addEmploye()
+{
+    ui->textBrowser->clear();
+
+    QString id = ui->editId->text();
+    QString fullName = ui->editFullName->text();
+    QString yearOfBirth = ui->editYearOfBirth->text();
+    Gender gender = static_cast<Gender>(ui->comboGender->currentIndex());
+
+    if(id != QString() && fullName != QString() && yearOfBirth != QString())
+    {
+        Employe employe(id.toInt(), fullName, yearOfBirth.toInt(), gender);
+
+        employes.push_back(employe);
+
+        CarCsvWriter csv("D:\\QtProjects\\Lab2\\database.csv");
+
+        if(csv.is_open())
+            csv.writeEmploye(employes);
+
+        ui->editId->clear();
+        ui->editFullName->clear();
+        ui->editYearOfBirth->clear();
+    }
+    else
+    {
+        ui->textBrowser->clear();
+        ui->textBrowser->append("Enter the data correctly!");
+    }
+}
