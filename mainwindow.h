@@ -17,6 +17,7 @@ public:
     ~MainWindow();
 public slots:
     void searchEmploye();
+    void addEmploye();
 
 private:
     Ui::MainWindow *ui;
