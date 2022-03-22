@@ -14,6 +14,7 @@ public:
 
 public:
     int getAge() const { return 2022 - year; }
+    QString to_string();
 
 public:
     Employe(int _id, QString _fullName, int _year, Gender _gender);

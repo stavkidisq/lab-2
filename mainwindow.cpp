@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //Create CSVReader class instance.
-    CSVReader csv("D:\\QtProjects\\Lab2\\database.csv");
+    CSVReader csv("D:\\QtProjects\\Lab4\\Lab_2\\database.csv");
 
     //.csv should be file is open.
     if(csv.is_open())
@@ -41,10 +41,13 @@ void MainWindow::searchEmploye()
     {
         if(employe.fullName == ui->editSearch->text())
         {
-            ui->textBrowser->append(QString::number(employe.id) + ", " + employe.fullName
+            ui->textBrowser->appendGreen(QString::number(employe.id) + ", " + employe.fullName
                                     + ", " + QString::number(employe.year) +", " + QString::number(employe.gender));
         }
     }
+
+    if(ui->textBrowser->toPlainText() == "")
+        ui->textBrowser->appendRed("Nothing was founded!");
 }
 
 void MainWindow::addEmploye()
@@ -62,7 +65,7 @@ void MainWindow::addEmploye()
 
         employes.push_back(employe);
 
-        CarCsvWriter csv("D:\\QtProjects\\Lab2\\database.csv");
+        CarCsvWriter csv("D:\\QtProjects\\Lab4\\Lab_2\\database.csv");
 
         if(csv.is_open())
             csv.writeEmploye(employes);

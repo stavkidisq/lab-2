@@ -12,15 +12,23 @@ SOURCES += \
     carcsvwriter.cpp \
     csvreader.cpp \
     employe.cpp \
+    engineer.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mytextbrowser.cpp \
+    student.cpp \
+    teacher.cpp
 
 HEADERS += \
     Gender.h \
     carcsvwriter.h \
     csvreader.h \
     employe.h \
-    mainwindow.h
+    engineer.h \
+    mainwindow.h \
+    mytextbrowser.h \
+    student.h \
+    teacher.h
 
 FORMS += \
     mainwindow.ui
