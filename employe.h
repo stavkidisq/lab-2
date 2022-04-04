@@ -3,7 +3,7 @@
 
 #include <Gender.h>
 #include <QString>
-
+#include<json.hpp>
 class Employe
 {
 public:
@@ -18,7 +18,9 @@ public:
 
 public:
     Employe(int _id, QString _fullName, int _year, Gender _gender);
+    Employe();
     ~Employe();
 };
+void from_json(const nlohmann::json& j, Employe& employe);
 
 #endif // EMPLOYE_H

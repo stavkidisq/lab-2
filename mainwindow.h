@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include<employe.h>
+#include<abstractreader.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,10 +19,13 @@ public:
 public slots:
     void searchEmploye();
     void addEmploye();
+    void processFile(AbstractReader& reader);
+    QString getFilePath();
 
 private:
     Ui::MainWindow *ui;
 
     std::vector<Employe> employes;
+    QString filePath;
 };
 #endif // MAINWINDOW_H

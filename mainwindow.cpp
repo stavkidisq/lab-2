@@ -3,8 +3,15 @@
 
 #include <carcsvwriter.h>
 #include<csvreader.h>
+#include<jsonreader.h>
+#include<qfiledialog.h>
 
 using namespace std;
+
+QString MainWindow::getFilePath()
+{
+    return QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.csv *.json");
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,8 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QString filePath = getFilePath();
+
     //Create CSVReader class instance.
-    CSVReader csv("D:\\QtProjects\\Lab4\\Lab_2\\database.csv");
+    CSVReader csv(filePath);
+    JSONReader json("D:\\QtProjects\\Lab4\\Lab_2\\database.json");
+    processFile(csv);
 
     //.csv should be file is open.
     if(csv.is_open())
@@ -78,5 +89,13 @@ void MainWindow::addEmploye()
     {
         ui->textBrowser->clear();
         ui->textBrowser->append("Enter the data correctly!");
+    }
+}
+
+void MainWindow::processFile(AbstractReader& reader)
+{
+    if(reader.is_open())
+    {
+        reader.readAll();
     }
 }

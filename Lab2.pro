@@ -9,10 +9,12 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    abstractreader.cpp \
     carcsvwriter.cpp \
     csvreader.cpp \
     employe.cpp \
     engineer.cpp \
+    jsonreader.cpp \
     main.cpp \
     mainwindow.cpp \
     mytextbrowser.cpp \
@@ -21,10 +23,13 @@ SOURCES += \
 
 HEADERS += \
     Gender.h \
+    abstractreader.h \
     carcsvwriter.h \
     csvreader.h \
     employe.h \
     engineer.h \
+    json.hpp \
+    jsonreader.h \
     mainwindow.h \
     mytextbrowser.h \
     student.h \
@@ -39,4 +44,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    database.csv
+    database.csv \
+    database.json

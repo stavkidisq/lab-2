@@ -18,6 +18,13 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Add file</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLineEdit" name="editSearch"/>
       </item>
       <item>
@@ -149,9 +156,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getFilePath()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>63</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>104</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>searchEmploye()</slot>
   <slot>addEmploye()</slot>
+  <slot>getFilePath()</slot>
  </slots>
 </ui>

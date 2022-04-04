@@ -7,17 +7,17 @@
 #include <iostream>
 #include <fstream>
 
+#include<abstractreader.h>
 
-class CSVReader
+class CSVReader : public AbstractReader
 {
-    std::ifstream fin;
 public:
     CSVReader(const QString& fileName);
     ~CSVReader();
 
-    bool is_open ()const { return fin.is_open(); }
+    bool is_open () override { return fin.is_open(); }
 
-    std::vector<Employe> readAll();
+    std::vector<Employe> readAll() override;
     Employe getEmploye(std::vector<QString> employeLine);
     std::vector<QString> split(const QString& str, char c);
 public:
