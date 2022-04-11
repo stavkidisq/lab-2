@@ -100,10 +100,12 @@ void MainWindow::getFilePath()
 
 void MainWindow::newReadAll(AbstractReader& reader)
 {
+    employes.clear();
     Employe employe;
 
     while(reader >> employe)
     {
         ui->textBrowser->appendGreen(employe.to_string());
+        employes.push_back(employe);
     }
 }

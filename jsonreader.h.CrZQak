@@ -20,24 +20,20 @@ public:
 
     virtual AbstractReader& operator>>(Employe& employe) override
     {
-            std::string strFullName;
+        std::string strFullName;
 
-            if(it != json.end())
-            {
-                employe.id = it.value()["id"];
-                strFullName = it.value()["fullName"];
-                employe.gender = it.value()["gender"];
-                employe.year = it.value()["year"];
-                employe.fullName = QString::fromStdString(strFullName);
-            }
-
-            it++;
+        employe.id = it.value()["id"];
+        strFullName = it.value()["fullName"];
+        employe.gender = it.value()["gender"];
+        employe.year = it.value()["year"];
+        employe.fullName = QString::fromStdString(strFullName);
+        ++it;
 
         return *this;
     }
     virtual operator bool() const override
     {
-        return it - 1 != json.end();
+        return it->size() != json.size();
     }
 
     std::vector<Employe> readAll() override
