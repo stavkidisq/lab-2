@@ -49,6 +49,7 @@ Employe CSVReader::getEmploye(std::vector<QString> employeLine)
 std::vector<Employe> CSVReader::readAll()
 {
     std::vector<Employe> employes;
+    Employe employe;
 
     while(!fin.eof())
     {

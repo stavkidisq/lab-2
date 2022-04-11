@@ -13,6 +13,8 @@ public:
 public:
     virtual std::vector<Employe> readAll() = 0;
     virtual bool is_open() = 0;
+    virtual AbstractReader& operator>>(Employe& employe) = 0;
+    virtual operator bool() const = 0;
 };
 
 #endif // ABSTRACTREADER_H

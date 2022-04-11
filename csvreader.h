@@ -31,6 +31,24 @@ public:
     {
         return std::move(reader);
     };
+    CSVReader& operator>>(Employe& employe) override
+    {
+        std::string line;
+        getline(fin, line);
+
+        if(line != "")
+        {
+            std::vector<QString> employeStr = split(QString::fromUtf8(line), ';');
+
+            employe = getEmploye(employeStr);
+        }
+
+        return *this;
+    }
+    operator bool() const override
+    {
+        return !fin.eof();
+    }
 };
 
 #endif // CSVREADER_H

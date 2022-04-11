@@ -8,35 +8,11 @@
 
 using namespace std;
 
-QString MainWindow::getFilePath()
-{
-    return QFileDialog::getOpenFileName(0, "Open Dialog", "", "*.csv *.json");
-}
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    QString filePath = getFilePath();
-
-    //Create CSVReader class instance.
-    CSVReader csv(filePath);
-    JSONReader json("D:\\QtProjects\\Lab4\\Lab_2\\database.json");
-    processFile(csv);
-
-    //.csv should be file is open.
-    if(csv.is_open())
-    {
-        //Read all objects from .csv file.
-        employes = csv.readAll();
-
-        //Sort employes vector.
-        std::sort(employes.begin(), employes.end(), [](const Employe &employe1, const Employe &employe2){
-            return employe1.year > employe2.year;
-         });
-    }
 }
 
 MainWindow::~MainWindow()
@@ -48,9 +24,11 @@ void MainWindow::searchEmploye()
 {
     ui->textBrowser->clear();
 
+    std::sort(employes.begin(), employes.end());
+
     for(const auto& employe : employes)
     {
-        if(employe.fullName == ui->editSearch->text())
+        if(employe.fullName == ui->editSearch->text() || ui->editSearch->text() == "")
         {
             ui->textBrowser->appendGreen(QString::number(employe.id) + ", " + employe.fullName
                                     + ", " + QString::number(employe.year) +", " + QString::number(employe.gender));
@@ -96,6 +74,36 @@ void MainWindow::processFile(AbstractReader& reader)
 {
     if(reader.is_open())
     {
-        reader.readAll();
+        newReadAll(reader);
+    }
+}
+
+void MainWindow::getFilePath()
+{
+    ui->textBrowser->clear();
+    filePath = QFileDialog::getOpenFileName(0, "Open File", "", "*.csv *.json");
+
+    QFileInfo inf(filePath);
+    QString file_extenstion = inf.suffix();
+
+    if(file_extenstion == "csv")
+    {
+        CSVReader csv(filePath);
+        processFile(csv);
+    }
+    else if(file_extenstion == "json")
+    {
+        JSONReader json(filePath);
+        processFile(json);
+    }
+}
+
+void MainWindow::newReadAll(AbstractReader& reader)
+{
+    Employe employe;
+
+    while(reader >> employe)
+    {
+        ui->textBrowser->appendGreen(employe.to_string());
     }
 }

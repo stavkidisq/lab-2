@@ -14,6 +14,11 @@ Employe::Employe()
 
 }
 
+QString Employe::to_string() const
+{
+    return QString::number(id) + ";" + fullName + ";" + QString::number(year) +";" + QString::number(gender);
+}
+
 Employe::~Employe()
 {
 

@@ -1,5 +1,5 @@
 [
     {"id": 0, "fullName": "All Stone", "gender": 1, "year": 2000},
-    {"id": 1, "fullName": "Erick Stone", "year": 1, "year": 1995},
-    {"id": 2, "model": "Emma Stone", "year": 0, "year": 1999}
+    {"id": 1, "fullName": "Erick Stone", "gender": 1, "year": 1995},
+    {"id": 2, "fullName": "Emma Stone", "gender": 0, "year": 1999}
 ]

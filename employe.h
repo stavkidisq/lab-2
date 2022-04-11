@@ -14,9 +14,13 @@ public:
 
 public:
     int getAge() const { return 2022 - year; }
-    QString to_string();
+    QString to_string() const;
 
 public:
+    bool operator<(const Employe& employe){
+        return this->year > employe.year;
+    }
+
     Employe(int _id, QString _fullName, int _year, Gender _gender);
     Employe();
     ~Employe();

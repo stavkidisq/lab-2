@@ -10,18 +10,42 @@
 
 class JSONReader : public AbstractReader
 {
+private:
+    int index = 0;
+    nlohmann::json json;
+    nlohmann::json::iterator it;
 public:
     JSONReader(const QString& fileName);
     ~JSONReader();
+
+    virtual AbstractReader& operator>>(Employe& employe) override
+    {
+        std::string strFullName;
+        employe.id = 0;
+
+        employe.id = it.value()["id"];
+        strFullName = it.value()["fullName"];
+        employe.gender = it.value()["gender"];
+        employe.year = it.value()["year"];
+        employe.fullName = QString::fromStdString(strFullName);
+
+        if(it != json.end())
+                it++;
+
+        return *this;
+    }
+    virtual operator bool() const override
+    {
+        return !fin.eof();
+    }
 
     std::vector<Employe> readAll() override
     {
         std::vector<Employe> employes;
 
-        std::ifstream f("cars.json");
         nlohmann::json json;
 
-        f >> json;
+        fin >> json;
 
         for (auto& e: json)
         {

@@ -20,7 +20,8 @@ public slots:
     void searchEmploye();
     void addEmploye();
     void processFile(AbstractReader& reader);
-    QString getFilePath();
+    void newReadAll(AbstractReader& reader);
+    void getFilePath();
 
 private:
     Ui::MainWindow *ui;
