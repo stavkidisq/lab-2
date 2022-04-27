@@ -39,11 +39,22 @@ std::vector<QString> CSVReader::split(const QString& str, char c)
 
 Employe CSVReader::getEmploye(std::vector<QString> employeLine)
 {
-    // Create a class instance
-    Employe employe(employeLine[0].toInt(), employeLine[1],
-            employeLine[2].toInt(), static_cast<Gender>(employeLine[3].toInt()));
+    try
+    {
+        // Create a class instance
+        Employe employe(
+                std::stoi(employeLine[0].toUtf8().constData()),
+                employeLine[1],
+                std::stoi(employeLine[2].toUtf8().constData()),
+                static_cast<Gender>(std::stoi(employeLine[3].toUtf8().constData()))
+                );
 
-    return employe;
+        return employe;
+    }
+    catch(std::logic_error &err)
+    {
+        throw CsvException("error", strnum);
+    }
 }
 
 std::vector<Employe> CSVReader::readAll()
@@ -55,6 +66,8 @@ std::vector<Employe> CSVReader::readAll()
     {
         std::string line;
         getline(fin, line);
+
+        strnum++;
 
         if(line != "")
         {

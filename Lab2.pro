@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     abstractreader.cpp \
     carcsvwriter.cpp \
+    csvexception.cpp \
     csvreader.cpp \
     employe.cpp \
     engineer.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     Gender.h \
     abstractreader.h \
     carcsvwriter.h \
+    csvexception.h \
     csvreader.h \
     employe.h \
     engineer.h \

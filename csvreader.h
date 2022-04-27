@@ -6,11 +6,15 @@
 #include<QFile>
 #include <iostream>
 #include <fstream>
+#include<QMessageBox>
+#include<csvexception.h>
 
 #include<abstractreader.h>
 
 class CSVReader : public AbstractReader
 {
+int strnum = 0;
+
 public:
     CSVReader(const QString& fileName);
     ~CSVReader();
@@ -39,7 +43,6 @@ public:
         if(line != "")
         {
             std::vector<QString> employeStr = split(QString::fromUtf8(line), ';');
-
             employe = getEmploye(employeStr);
         }
 

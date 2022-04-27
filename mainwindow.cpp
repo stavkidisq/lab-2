@@ -5,6 +5,8 @@
 #include<csvreader.h>
 #include<jsonreader.h>
 #include<qfiledialog.h>
+#include<csvexception.h>
+#include<qmessagebox.h>
 
 using namespace std;
 
@@ -103,9 +105,17 @@ void MainWindow::newReadAll(AbstractReader& reader)
     employes.clear();
     Employe employe;
 
-    while(reader >> employe)
+    try
     {
-        ui->textBrowser->appendGreen(employe.to_string());
-        employes.push_back(employe);
+        while(reader >> employe)
+        {
+            ui->textBrowser->appendGreen(employe.to_string());
+            employes.push_back(employe);
+        }
+    }
+    catch(CsvException &e)
+    {
+        ui->textBrowser->clear();
+        ui->textBrowser->appendRed("Error at CSV line number: " + QString::number(e.getStrnum()));
     }
 }
